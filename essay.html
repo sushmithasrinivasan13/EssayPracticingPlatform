@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESSAY</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="essay-body">
+    <div>
+        <p>Topic: <span id="topic"></span></p>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const topic = urlParams.get('topic');
+        const topicElement = document.getElementById("topic");
+    
+        if (topic) {
+            topicElement.textContent = topic;
+        }
+    </script>    
+    <div id="m">
+    <label for="time">Set a Timer :</label>
+    <select name="time" id="time">
+        <!-- <option value="1">1 Minutes</option> -->
+        <option value="5">5 Minutes</option>
+        <option value="10">10 Minutes</option>
+        <option value="15">15 Minutes</option>
+        <option value="20">20 Minutes</option>
+        <option value="25">25 Minutes</option>
+        <option value="30">30 Minutes</option>
+    </select>
+    <button id="startTimer" onclick="startTimer()">Start Timer</button>
+    <p id="timerDisplay"></p>
+    <div class="reset-container">
+        <button id="rese" onclick="reset()">Reset</button>
+        <span id="resetMessage" style="display: none;">Click Reset if you want to type again.</span>
+    </div>
+    </div>
+    <div class="con">
+        <textarea id="userInput" rows="10" cols="50" placeholder="Write your essay here..."></textarea>
+    </div>
+    <button id="res" onclick="res()">Result</button>
+    <script src="app.js"></script>
+</body>
+</html>

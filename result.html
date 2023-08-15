@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essay Result</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="resPage">
+    <h1 id="h1">Essay Result</h1>
+    <div id="wordCount">Word Count: </div>
+    <div id="misspelledWords"></div>
+    <div id="spellingAccuracy"></div>
+    <div id="typingSpeed">Typing Speed: </div>
+    <div class="resBut">
+        <button id="retryButton" onclick="retry()">Retry</button>
+        <button id="ExitButton" onclick="Exit()">Exit</button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const wordCount = urlParams.get("count");
+            const targetWordCount = 250;
+            const timeTakenInMinutes = 10; // Duration of the typing test in minutes
+
+            if (wordCount) {
+                const startTime = Date.now(); // Record the start time
+                const wordCountElement = document.getElementById("wordCount");
+                const wordArray = `Word Count: ${wordCount}`.split(""); // Include "Word Count"
+                wordCountElement.textContent = ""; // Clear the content initially
+
+                let currentLetterIndex = 0;
+                const interval = setInterval(() => {
+                    if (currentLetterIndex < wordArray.length) {
+                        wordCountElement.textContent += wordArray[currentLetterIndex];
+                        currentLetterIndex++;
+                    } else {
+                        clearInterval(interval);
+
+                        const numWords = parseInt(wordCount, 10);
+                        let accuracyMessage;
+                        if (numWords >= targetWordCount) {
+                            accuracyMessage = `Congratulations! You've reached ${numWords} words.`;
+                        } else {
+                            accuracyMessage = `You haven't reached ${targetWordCount} words. Try Again!`;
+                        }
+
+                        const messageElement = document.createElement("p");
+                        messageElement.style.fontSize = "24px";
+                        messageElement.style.color = numWords >= targetWordCount ? "green" : "red";
+                        messageElement.textContent = accuracyMessage;
+                        wordCountElement.appendChild(messageElement);
+
+                        setTimeout(() => {
+                            const spellingAccuracy = ((numWords / targetWordCount) * 100).toFixed(2);
+                            const spellingAccuracyElement = document.getElementById("spellingAccuracy");
+                            const spellingAccuracyMessage = `Spelling Accuracy: ${spellingAccuracy}%`;
+
+                            let accuracyLetterIndex = 0;
+                            const accuracyInterval = setInterval(() => {
+                                if (accuracyLetterIndex < spellingAccuracyMessage.length) {
+                                    const accuracyLetter = spellingAccuracyMessage[accuracyLetterIndex];
+                                    const accuracyLetterSpan = document.createElement("span");
+                                    accuracyLetterSpan.textContent = accuracyLetter;
+                                    spellingAccuracyElement.appendChild(accuracyLetterSpan);
+                                    accuracyLetterIndex++;
+                                } else {
+                                    clearInterval(accuracyInterval);
+                                }
+                            }, 100);
+                        }, 250); // Wait for 250ms before displaying spelling accuracy
+
+                        // Calculate typing speed and display it
+                        const endTime = Date.now(); // Record the end time
+                        const timeTakenInSeconds = (endTime - startTime) / 1000; // Convert to seconds
+                        const grossWordsPerMin = (numWords / timeTakenInMinutes).toFixed(2);
+                        const netWordsPerMin = (numWords / timeTakenInMinutes).toFixed(2);
+                        const accuracy = ((netWordsPerMin / grossWordsPerMin) * 100).toFixed(2);
+
+                        const typingSpeedElement = document.getElementById("typingSpeed");
+                        typingSpeedElement.textContent = `Typing Speed: ${grossWordsPerMin} WPM`;
+
+                    }
+                }, 100); // Wait for 100ms before starting the animation
+            }
+        });
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
