@@ -97,7 +97,7 @@ function reset() {
     document.getElementById('startTimer').disabled = false;
     document.getElementById('resetMessage').style.display = 'none';
     document.getElementById('timerDisplay').innerHTML = "";
-    document.getElementById('userInput').disabled = false;
+    document.getElementById('userInput').disabled = true;
     document.getElementById('userInput').value = "";
     document.getElementById('seeResultButton').style.display = 'none';
 }
