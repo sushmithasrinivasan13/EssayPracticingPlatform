@@ -53,12 +53,11 @@ function custom(){
 function start() {
     const selectedTopic = document.getElementById("box").innerText;
     const customInputValue = document.getElementById("customInput").value.trim();
-    if (!selectedTopic&&!customInputValue) {
+    if (!customInputValue) {
         alert("PLEASE..! Click On Random Topic Or Provide a Custom Topic");
         return;
     }
-    const chosenTopic = customInputValue ? customInputValue : selectedTopic;
-    location.href = `essay.html?topic=${encodeURIComponent(selectedTopic)}`;
+   location.href = `essay.html?topic=${encodeURIComponent(customInputValue)}`;
 }
 document.getElementById('startTimer').addEventListener('click', start);
 
