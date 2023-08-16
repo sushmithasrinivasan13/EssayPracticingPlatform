@@ -57,6 +57,7 @@ function start() {
         alert("PLEASE..! Click On Random Topic Or Provide a Custom Topic");
         return;
     }
+    const chosenTopic = customInputValue ? customInputValue : selectedTopic;
     location.href = `essay.html?topic=${encodeURIComponent(selectedTopic)}`;
 }
 document.getElementById('startTimer').addEventListener('click', start);
