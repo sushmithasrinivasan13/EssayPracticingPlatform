@@ -7,17 +7,17 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="essay-body">
-    <div>
-        <p>Topic: <span id="topic"></span></p>
-    </div>
+    <div id="topicDisplay"></div>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const topic = urlParams.get('topic');
-        const topicElement = document.getElementById("topic");
-    
-        if (topic) {
-            topicElement.textContent = topic;
-        }
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const customTopic = urlParams.get("topic");
+            
+            if (customTopic) {
+                const topicDisplay = document.getElementById("topicDisplay");
+                topicDisplay.textContent = `Topic: ${customTopic}`;
+            }
+        });
     </script>    
     <div id="m">
     <label for="time">Set a Timer :</label>
