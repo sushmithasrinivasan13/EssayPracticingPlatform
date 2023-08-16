@@ -26,7 +26,7 @@
             if (wordCount) {
                 const startTime = Date.now(); // Record the start time
                 const wordCountElement = document.getElementById("wordCount");
-                const wordArray = wordCount.split(/[,.\s]+/); // Include "Word Count"
+                const wordArray = `Word Count: ${wordCount}`.split(/[,.\s]+/);  
                 wordCountElement.textContent = ""; // Clear the content initially
 
                 let currentLetterIndex = 0;
