@@ -141,5 +141,5 @@ function retry(){
     location.href="index.html";
 }
 function Exit(){
-    window.location.href = "https://www.google.com";
+    location.href = "https://www.google.com";
 }
